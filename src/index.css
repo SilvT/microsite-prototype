@@ -1,0 +1,421 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Plus Jakarta Sans:Bold";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans:Light";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans:Medium";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans:Regular";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans:SemiBold";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #fff;
+  }
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  height: var(--app-h);
+  overflow: hidden;
+  background: white;
+}
+
+.loading-stage,
+.landing-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: white;
+}
+
+.loading-stage {
+  z-index: 2;
+  transition: background-color 300ms ease-out;
+}
+
+.loading-canvas {
+  --notch-offset: max(env(safe-area-inset-top, 0px), 44px);
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: white;
+  transition: background-color 300ms ease-out;
+}
+
+.loading-stage .motion-layer {
+  transition-duration: var(--frame-duration);
+  transition-property: inset, top, right, bottom, left, width, height, transform, opacity;
+  transition-timing-function: var(--frame-easing);
+}
+
+.tomato-five,
+.falling-tomato,
+.footer-tomato {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.tomato-three {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 106.862px;
+  height: 110.547px;
+  transform: translate(-50%, -50%) rotate(-68.71deg);
+}
+
+.loading-stage.is-complete,
+.loading-stage.is-complete .loading-canvas {
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Hand-off: see handoff.ts. The landing page fades in while copies of the intro's logo and greeting fly
+   to the landing page's logo and greeting; everything else from the intro just fades away. */
+.loading-stage.is-complete .non-footer-motion,
+.loading-stage.is-complete .reveal-layer {
+  opacity: 0;
+  transition: opacity 300ms ease-out 150ms;
+}
+
+.loading-stage.is-complete .reveal-layer {
+  animation: none;
+}
+
+.loading-stage.is-complete .thanks {
+  transition-duration: 220ms;
+  transition-delay: 0ms;
+}
+
+.loading-stage.is-complete .footer-motion {
+  transition:
+    transform 650ms cubic-bezier(0.4, 0, 1, 1),
+    opacity 450ms ease-in;
+}
+
+.loading-stage.is-solo .footer-tomato-one,
+.loading-stage.is-solo .footer-tomato-two,
+.loading-stage.is-solo .footer-tomato-three {
+  opacity: 0;
+  transform: translateY(180px);
+}
+
+.loading-stage.is-solo .footer-tomato-four {
+  opacity: 0;
+}
+
+.tomato-bounce {
+  position: absolute;
+  right: -9px;
+  bottom: 4px;
+  width: 53px;
+  height: 153px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+.tomato-bounce.is-active {
+  opacity: 1;
+}
+
+.smart-meter-interactive {
+  width: min(350px, calc(100% - 24px));
+  max-height: calc(var(--app-h) - 263px + var(--hdr-shift, 0px));
+  padding: 0 8px 32px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  outline: none;
+}
+
+.smart-meter-interactive::-webkit-scrollbar {
+  display: none;
+}
+
+.smart-meter-interactive [data-name="Accordian Row"] {
+  cursor: pointer;
+}
+
+.smart-meter-variant {
+  animation: smart-meter-variant-in 300ms ease-out both;
+}
+
+.smart-meter-animation-frame {
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity;
+}
+
+.smart-meter-animation-frame.is-active {
+  opacity: 1;
+}
+
+.smart-meter-animation-frame.smart-meter-tomato-frame {
+  animation: smart-meter-tomato-spring 1171ms cubic-bezier(0.22, 1.15, 0.36, 1) both;
+}
+
+.landing-screen.is-visible [data-name="tomato footer"] > div {
+  opacity: 0;
+}
+
+/* Decorative and invisible once the page is up: must never swallow taps meant for the accordion. */
+.landing-screen [data-name="tomato footer"] {
+  pointer-events: none;
+}
+
+.tomato-five {
+  filter: drop-shadow(0 2px 0.5px rgb(0 0 0 / 10%));
+}
+
+/* When a tomato switches from its falling pose to its footer pose, ease the tilt instead of snapping. */
+.tomato-five,
+.falling-tomato,
+.footer-tomato {
+  transition: transform 700ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.tomato-five.is-footer {
+  transform: rotate(13deg);
+}
+
+.falling-tomato.tomato-six,
+.falling-tomato.tomato-seven {
+  transform: scaleX(-1);
+}
+
+.footer-tomato.tomato-six {
+  transform: scaleX(-1) rotate(10.82deg);
+}
+
+.footer-tomato.tomato-seven {
+  transform: scaleX(-1) rotate(-11.72deg);
+}
+
+.footer-tomato.tomato-eight {
+  transform: rotate(13.8deg);
+}
+
+.reveal-layer {
+  animation: reveal 300ms ease-out both;
+}
+
+.greeting,
+.thanks {
+  position: absolute;
+  left: 50%;
+  width: 249px;
+  transform: translate(-50%, var(--notch-offset));
+  color: #004a4b;
+  text-align: center;
+}
+
+.loading-canvas[data-frame="9"] .wordmark,
+.loading-canvas[data-frame="10"] .wordmark,
+.loading-canvas[data-frame="11"] .wordmark {
+  transform: translateY(var(--notch-offset));
+}
+
+.greeting {
+  top: 26.7606%;
+  margin: 0;
+  font-family: "Plus Jakarta Sans:Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.greeting strong {
+  font-family: "Plus Jakarta Sans:Bold";
+  font-weight: 700;
+}
+
+.thanks {
+  top: 37.5%;
+  margin: 0;
+  font-family: "Plus Jakarta Sans:Medium";
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes smart-meter-variant-in {
+  from {
+    opacity: 0.65;
+    transform: translateY(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes smart-meter-tomato-spring {
+  0% {
+    transform: scale(0.96);
+  }
+
+  58% {
+    transform: scale(1.035);
+  }
+
+  82% {
+    transform: scale(0.99);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.landing-screen {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+}
+
+.landing-screen.is-visible {
+  opacity: 1;
+}
+
+/* The accordion rises in a beat after the page, so it feels like the content arrives. */
+.landing-screen .smart-meter-interactive {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 500ms ease-out 300ms,
+    transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 300ms;
+}
+
+.landing-screen.is-visible .smart-meter-interactive {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-stage .motion-layer,
+  .landing-screen,
+  .landing-screen .smart-meter-interactive {
+    transition-duration: 1ms !important;
+  }
+
+  .tomato-bounce * {
+    transition-duration: 1ms !important;
+  }
+
+  .smart-meter-animation-frame {
+    transition-duration: 1ms !important;
+  }
+
+  .smart-meter-animation-frame.smart-meter-tomato-frame {
+    animation: none;
+  }
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+
+:root {
+  --app-h: 100dvh;
+}
+
+/* Desktop: show the prototype inside a simple phone frame. Real phones stay full-bleed. */
+@media (min-width: 560px) {
+  :root {
+    --app-h: min(844px, calc(100dvh - 48px));
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    background: #e9ecec;
+  }
+  #root {
+    width: auto;
+    min-height: 0;
+  }
+  .app-shell {
+    width: 390px;
+    border-radius: 52px;
+    border: 10px solid #151a1a;
+    box-sizing: content-box;
+    box-shadow:
+      0 0 0 2px #3a4242,
+      0 30px 60px -10px rgba(0, 40, 40, 0.35),
+      0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateZ(0); /* clips children to the rounded corners */
+  }
+}
+
+/* Header slides up as the accordion scrolls (--hdr-shift is set from SmartMeterAccordion). */
+.landing-screen [data-name="Navbar"],
+.landing-screen [data-name="Welcome info"] {
+  transform: translateY(calc(var(--hdr-shift, 0px) * -1));
+}
+
+/* While the copies fly (handoff.ts) the real landing logo + greeting wait, and the intro's originals are hidden. */
+.landing-screen[data-flight] [data-name="Navbar"] img,
+.landing-screen[data-flight] [data-node-id="2:1438"] {
+  opacity: 0;
+}
+
+.loading-stage.is-flying .wordmark,
+.loading-stage.is-flying .greeting {
+  visibility: hidden;
+}

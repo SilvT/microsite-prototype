@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Spinner-animation" clip-path="url(#clip0_0_54)">
+<g id="Vector">
+</g>
+<path id="00" d="M15 3.75V7.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+<path id="02" d="M26.25 15H22.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+<path id="03" d="M22.9547 22.9547L20.3027 20.3027" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+<path id="05" d="M7.04531 22.9547L9.69727 20.3027" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+<path id="01" d="M24.652 7L22 9.65195" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+<path id="06" d="M3.75 15H7.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+<path id="07" d="M7.04531 7.04531L9.69727 9.69727" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#00B57D"/>
+</g>
+<defs>
+<clipPath id="clip0_0_54">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>
