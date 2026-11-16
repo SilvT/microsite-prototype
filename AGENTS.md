@@ -29,7 +29,7 @@ React 19, Vite 8, Tailwind CSS v4 (`@tailwindcss/vite`, utilities in JSX, global
 - `src/Microsite.tsx`: the landing page (header, MPAN, progress bar, accordion mount).
 - `src/SmartMeterAccordion.tsx`: the journey stepper. Steps and error screens are data (`SCENARIOS`), rendered by one small component.
 - `src/user.ts`: fake-user generator (name, UK address, 13-digit MPAN, always-future dates).
-- `src/TomatoBounce.tsx`: the hopping tomato in the corner (random rest between hops; picks from four hop "moves" in `MOVES`, never the same twice in a row; elastic landing from `bounce()` in `motion.ts`).
+- `src/TomatoBounce.tsx`: the hopping tomato in the corner (random rest between hops; picks from four hop "moves" in `MOVES`, never the same twice in a row; tap the tomato to make it hop now; elastic landing from `bounce()` in `motion.ts`).
 - `public/assets/`: SVGs exported from Figma (referenced by filename).
 
 ## Conventions

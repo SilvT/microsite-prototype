@@ -80,9 +80,9 @@ export function footerTrack(insets: string[], { delay = 0 } = {}) {
 
 // ---- the logo mark ------------------------------------------------------------------------------
 // Its whole journey is one clock-driven path (design px, centre y): elastic drop-in, a happy pop up into
-// the lockup, a settle beside the wordmark, then a long unhurried glide out through the top.
+// the lockup above the wordmark, then a glide straight up and out (before the wordmark moves).
 
-const MARK = { w: 71.125, wLockup: 55.319, wSmall: 27.66, rest: 329, lockup: 67, small: 49.5, gone: -82.5 };
+const MARK = { w: 71.125, wLockup: 55.319, wSmall: 27.66, rest: 329, lockup: 67, gone: -82.5 };
 const MARK_BOUNCE = 0.45; // more elastic than the tomatoes
 
 export function markState(t: number, dropAt: number) {
@@ -94,15 +94,12 @@ export function markState(t: number, dropAt: number) {
     y = lerp(340, MARK.lockup, ease.back(r)); // pop up, overshooting a little
     w = lerp(MARK.w, MARK.wLockup, ease.inOut(r));
   }
-  if (t >= 4600) {
-    const m = ease.inOut(clamp((t - 4600) / 550)); // shrink into the lockup
-    y = lerp(MARK.lockup, MARK.small, m);
-    w = lerp(MARK.wLockup, MARK.wSmall, m);
-    n = m;
-  }
-  if (t >= 5200) {
-    y = lerp(MARK.small, MARK.gone, ease.inOut(clamp((t - 5200) / 1600))); // slow start, long gentle glide out
-    n = 1;
+  if (t >= 4700) {
+    // Leaves straight up from the lockup (the wordmark is below it) and is gone before the wordmark glides to the top.
+    const e = ease.inOut(clamp((t - 4700) / 800));
+    y = lerp(MARK.lockup, MARK.gone, e);
+    w = lerp(MARK.wLockup, MARK.wSmall, e);
+    n = e;
   }
   return { y, w, n, q: d.q, s: d.s };
 }

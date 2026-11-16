@@ -243,6 +243,21 @@
   animation: reveal 300ms ease-out both;
 }
 
+/* The wordmark glides from its lockup spot to the top (its inset changes per frame) instead of jumping. */
+.loading-canvas .wordmark {
+  transition: inset var(--frame-duration) var(--frame-easing);
+}
+
+/* Text layers fade UP into place rather than popping in. (translate is its own property, so it
+   composes with the transforms these layers already have.) */
+@keyframes soft-in {
+  from { opacity: 0; translate: 0 14px; }
+  to { opacity: 1; translate: 0 0; }
+}
+.wordmark.reveal-layer { animation: soft-in 700ms cubic-bezier(0.2, 0, 0, 1) both; }
+.greeting.reveal-layer { animation: soft-in 750ms cubic-bezier(0.2, 0, 0, 1) 120ms both; }
+.thanks.reveal-layer { animation: soft-in 700ms cubic-bezier(0.2, 0, 0, 1) both; }
+
 .greeting,
 .thanks {
   position: absolute;

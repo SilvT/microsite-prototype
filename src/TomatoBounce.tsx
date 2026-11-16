@@ -66,6 +66,7 @@ function keyframes(H: number, dir: number, m: Move) {
 export default function TomatoBounce({ active }: { active: boolean }) {
   const hop = useRef<HTMLDivElement>(null);
   const spin = useRef<HTMLDivElement>(null);
+  const hopNow = useRef<() => void>(() => {}); // lets a tap start a hop right away
 
   useEffect(() => {
     if (!active) return;
@@ -85,6 +86,11 @@ export default function TomatoBounce({ active }: { active: boolean }) {
       ];
       timer = window.setTimeout(run, k.total + REST_MS * (1 + Math.random() * 4.8)); // rest 2.4-14s, random
     };
+    hopNow.current = () => {
+      if (anims.some((a) => a.playState === "running")) return; // already mid-hop: let it finish
+      window.clearTimeout(timer); // the tap replaces the pending random wait; run() schedules the next one
+      run();
+    };
     run();
     return () => {
       window.clearTimeout(timer);
@@ -98,7 +104,12 @@ export default function TomatoBounce({ active }: { active: boolean }) {
         ref={hop}
         style={{ position: "absolute", right: 0.01, bottom: -0.08, width: 52.992, height: 54.082, display: "flex", alignItems: "center", justifyContent: "center", transformOrigin: "50% 100%" }}
       >
-        <div ref={spin} style={{ position: "relative", width: 43.512, height: 45, transform: `rotate(${REST}deg)` }}>
+        {/* Only the tomato itself is tappable (not the box around it), so it never steals taps from the accordion. */}
+        <div
+          ref={spin}
+          onClick={() => hopNow.current()}
+          style={{ position: "relative", width: 43.512, height: 45, transform: `rotate(${REST}deg)`, pointerEvents: active ? "auto" : "none", cursor: "pointer", touchAction: "manipulation" }}
+        >
           <img
             alt=""
             src={`${import.meta.env.BASE_URL}assets/c973e.svg`}

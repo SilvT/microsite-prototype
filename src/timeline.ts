@@ -3,13 +3,13 @@
 // Tightened from the original Figma timing (about 10.6s real) to about 6.6s real: the ~2s stretch where
 // nothing new happened is gone, and the greeting reveal follows the landing directly.
 //
-//   0.1s  logo mark drops in and bounces      3.6s  mark rises into the lockup
-//   1.2s  tomatoes start to rain down         4.4s  wordmark       5.0s greeting       5.6s thanks line
-//   2.4s  tomatoes switch to their footer pose 6.9s  hand-off to the landing page
+//   0.1s  logo mark drops in and bounces      3.6s  mark rises into the lockup, 4.3s wordmark appears under it
+//   1.2s  tomatoes start to rain down         4.7s  mark leaves upward, 5.3s wordmark glides up + greeting
+//   2.4s  tomatoes switch to their footer pose 5.9s  thanks line, 7.1s hand-off to the landing page
 export const SPEED = 1.05;
 
-export const FRAME_TIMES = [100, 1100, 200, 200, 200, 200, 200, 200, 2000, 600, 600, 1300];
-export const ENTER_DURATIONS = [0, 1100, 200, 200, 200, 200, 200, 200, 2000, 500, 550, 300];
+export const FRAME_TIMES = [100, 1100, 200, 200, 200, 200, 200, 200, 1900, 1000, 600, 1200];
+export const ENTER_DURATIONS = [0, 1100, 200, 200, 200, 200, 200, 200, 1900, 500, 700, 300];
 export const ENTER_EASINGS = [
   "linear",
   "linear",
@@ -21,7 +21,7 @@ export const ENTER_EASINGS = [
   "linear",
   "linear",
   "ease-in-out",
-  "cubic-bezier(.2, 0, 0, 1)",
+  "cubic-bezier(.4, 0, .2, 1)", // frame 10: the wordmark glides to the top
   "cubic-bezier(.2, 0, 0, 1)",
 ];
 
