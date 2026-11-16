@@ -113,7 +113,7 @@ export default function App() {
           <nav
             aria-label="Prototype scenarios"
             onClick={(e) => e.stopPropagation()}
-            className="absolute inset-x-0 bottom-0 flex max-h-[88%] flex-col gap-1 overflow-y-auto rounded-t-2xl bg-white p-4 pb-8 text-[14px] shadow-2xl"
+            className="absolute inset-x-0 bottom-0 flex max-h-[88%] flex-col gap-1 overflow-y-auto rounded-t-2xl bg-white px-7 pb-8 pt-7 text-[14px] shadow-2xl"
           >
             {list}
           </nav>
