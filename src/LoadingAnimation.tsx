@@ -4,7 +4,7 @@ import TomatoBounce from "./TomatoBounce";
 import { END, START } from "./timeline";
 import { footerTrack, markState, topTrack } from "./motion";
 
-const assetPathPrefix = "/assets";
+const assetPathPrefix = `${import.meta.env.BASE_URL}assets`;
 const asset = (name: string) => `${assetPathPrefix}/${name}`;
 
 type Frame = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11";

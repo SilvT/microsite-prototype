@@ -2,7 +2,7 @@ import { useContext } from "react";
 import SmartMeterAccordion from "./SmartMeterAccordion";
 import { UserContext } from "./user";
 
-const assetPathPrefix = "/assets";
+const assetPathPrefix = `${import.meta.env.BASE_URL}assets`;
 const imgProperty11 = `${assetPathPrefix}/19dba.svg`;
 const imgArrowTail = `${assetPathPrefix}/b15c7.svg`;
 const imgArrowTip = `${assetPathPrefix}/9b20e.svg`;

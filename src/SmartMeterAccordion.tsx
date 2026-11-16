@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { UserContext } from "./user";
 
-const A = (n: string) => `/assets/${n}`;
+const A = (n: string) => `${import.meta.env.BASE_URL}assets/${n}`;
 const frames = (...ids: string[]) => ids.map((i) => A(`${i}.svg`));
 // Frame-by-frame loops exported from Figma (frame times are approximations)
 const SPINNER = frames("38673", "2d8a8", "5734b", "e9bef", "80d97", "36956", "3c0a2", "a8393");
